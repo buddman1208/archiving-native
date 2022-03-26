@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Archive</string>
+    <string name="input_category">카테고리를 입력해주세요</string>
+    <string name="text_all">전체</string>
+    <string name="search_category_result_none">찾으신 보관함은\n아직 등록되지 않았어요.</string>
+    <string name="category_add_btn_format" formatted="false">+ \'%s\' 추가</string>
+    <string name="current_exist_category">현재 있는 카테고리</string>
 </resources>

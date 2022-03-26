@@ -44,15 +44,15 @@
     </style>
     
     <style name="UG.Bold.18">
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">18sp</item>
     </style>
     
     <style name="UG.Bold.16">
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">16sp</item>
     </style>
     
     <style name="UG.Bold.14">
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">14sp</item>
     </style>
     
     <style name="UG.Medium.32">
@@ -64,15 +64,15 @@
     </style>
     
     <style name="UG.Medium.18">
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">18sp</item>
     </style>
     
     <style name="UG.Medium.16">
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">16sp</item>
     </style>
     
     <style name="UG.Medium.14">
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">14sp</item>
     </style>
     
     <style name="UG.Light.32">
@@ -82,38 +82,42 @@
     <style name="UG.Light.20">
         <item name="android:textSize">20sp</item>
     </style>
-    
+
     <style name="UG.Light.18">
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">18sp</item>
     </style>
-    
+
     <style name="UG.Light.16">
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">16sp</item>
     </style>
-    
+
     <style name="UG.Light.14">
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">14sp</item>
     </style>
-    
+
+    <style name="UG.Light.12">
+        <item name="android:textSize">12sp</item>
+    </style>
+
     <!-- Pretendard -->
     <style name="Pretendard.Bold.32">
         <item name="android:textSize">32sp</item>
     </style>
-    
+
     <style name="Pretendard.Bold.20">
         <item name="android:textSize">20sp</item>
     </style>
     
     <style name="Pretendard.Bold.18">
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">18sp</item>
     </style>
     
     <style name="Pretendard.Bold.16">
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">16sp</item>
     </style>
     
     <style name="Pretendard.Bold.14">
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">14sp</item>
     </style>
     
     <style name="Pretendard.Medium.32">
@@ -125,15 +129,15 @@
     </style>
     
     <style name="Pretendard.Medium.18">
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">18sp</item>
     </style>
     
     <style name="Pretendard.Medium.16">
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">16sp</item>
     </style>
     
     <style name="Pretendard.Medium.14">
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">14sp</item>
     </style>
     
     <style name="Pretendard.Light.32">
@@ -145,15 +149,15 @@
     </style>
     
     <style name="Pretendard.Light.18">
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">18sp</item>
     </style>
     
     <style name="Pretendard.Light.16">
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">16sp</item>
     </style>
     
     <style name="Pretendard.Light.14">
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">14sp</item>
     </style>
 
 </resources>
