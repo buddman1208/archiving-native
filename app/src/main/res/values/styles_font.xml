@@ -2,6 +2,7 @@
 <resources>
 
     <style name="UG">
+        <item name="android:letterSpacing">-0.021875</item>
         <item name="android:includeFontPadding">false</item>
     </style>
 
@@ -151,13 +152,17 @@
     <style name="Pretendard.Light.18">
         <item name="android:textSize">18sp</item>
     </style>
-    
+
     <style name="Pretendard.Light.16">
         <item name="android:textSize">16sp</item>
     </style>
-    
+
     <style name="Pretendard.Light.14">
         <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="Pretendard.Light.12">
+        <item name="android:textSize">12sp</item>
     </style>
 
 </resources>

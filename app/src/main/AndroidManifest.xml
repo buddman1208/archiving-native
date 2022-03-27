@@ -20,6 +20,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.samderra.archive.ui.view.category.CategoryActivity"
+            android:exported="true" />
     </application>
 
 </manifest>

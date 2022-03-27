@@ -4,6 +4,8 @@ import androidx.databinding.BindingAdapter
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.samderra.archive.base.BaseViewModel
+import com.samderra.archive.ui.adapter.CategoryAdapter
+import com.samderra.archive.ui.adapter.CategorySearchAdapter
 import com.samderra.archive.ui.model.main.Category
 
 class MainViewModel : BaseViewModel() {
