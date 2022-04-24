@@ -1,15 +1,12 @@
-package com.samderra.archive.ui.view.category
+package com.samderra.archive.ui.view.article
 
 import androidx.databinding.BindingAdapter
-import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.samderra.archive.base.BaseViewModel
-import com.samderra.archive.ui.adapter.ArticleGridAdapter
+import com.samderra.archive.ui.adapter.ArticleListAdapter
 import com.samderra.archive.ui.model.article.Article
 
-class CategoryViewModel : BaseViewModel() {
-
-    val articleOpenEvent = MutableLiveData<Article>()
+class ArticleViewModel : BaseViewModel() {
 
     val articleItems = listOf(
         Article.dummy(),
@@ -28,15 +25,11 @@ class CategoryViewModel : BaseViewModel() {
         Article.dummy()
     )
 
-    fun openArticle(article: Article) {
-        articleOpenEvent.value = article
-    }
-
     companion object {
         @JvmStatic
-        @BindingAdapter("bindArticleGridList")
-        fun bindArticleGridList(rv: RecyclerView, articleList: List<Article>) {
-            val adapter = rv.adapter as? ArticleGridAdapter?
+        @BindingAdapter("bindArticleList")
+        fun bindArticleList(rv: RecyclerView, articleList: List<Article>) {
+            val adapter = rv.adapter as? ArticleListAdapter?
             adapter?.updateItems(articleList)
         }
     }

@@ -12,7 +12,6 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModel
 import com.samderra.archive.BR
-import com.samderra.archive.R
 
 abstract class BaseVmActivity<T : ViewDataBinding>(
     @LayoutRes val layoutRes: Int,
@@ -69,7 +68,7 @@ abstract class BaseVmActivity<T : ViewDataBinding>(
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.home -> finish()
+            android.R.id.home -> finish()
         }
         return super.onOptionsItemSelected(item)
     }

@@ -9,6 +9,11 @@
         <variable
             name="item"
             type="com.samderra.archive.ui.model.main.Category" />
+
+        <variable
+            name="vm"
+            type="com.samderra.archive.ui.view.main.MainViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,6 +21,7 @@
         android:layout_height="wrap_content"
         android:background="@color/darkgrey400"
         android:padding="8dp"
+        android:onClick="@{() -> vm.openCategory(item)}"
         tools:context=".ui.view.main.MainActivity">
 
 

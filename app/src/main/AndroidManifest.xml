@@ -23,6 +23,9 @@
         <activity
             android:name="com.samderra.archive.ui.view.category.CategoryActivity"
             android:exported="true" />
+        <activity
+            android:name="com.samderra.archive.ui.view.article.ArticleActivity"
+            android:exported="true" />
     </application>
 
 </manifest>

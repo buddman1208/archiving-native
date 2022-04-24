@@ -1,10 +1,14 @@
 package com.samderra.archive.ui.view.category
 
+import android.content.Intent
 import android.view.Menu
 import com.samderra.archive.R
 import com.samderra.archive.base.BaseVmActivity
 import com.samderra.archive.databinding.ActivityCategoryBinding
 import com.samderra.archive.ui.adapter.ArticleGridAdapter
+import com.samderra.archive.ui.model.article.Article
+import com.samderra.archive.ui.model.main.Category
+import com.samderra.archive.ui.view.article.ArticleActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CategoryActivity() : BaseVmActivity<ActivityCategoryBinding>(
@@ -12,8 +16,12 @@ class CategoryActivity() : BaseVmActivity<ActivityCategoryBinding>(
     CategoryViewModel::class.java
 ) {
 
-    fun CategoryViewModel.setObserves() {
+    private val category: Category by lazy {
+        intent.getSerializableExtra("category") as Category
+    }
 
+    fun CategoryViewModel.setObserves() {
+        articleOpenEvent.observe(lifecycleOwner, ::openArticleActivity)
     }
 
     override fun initActivity() {
@@ -22,8 +30,12 @@ class CategoryActivity() : BaseVmActivity<ActivityCategoryBinding>(
         initCollapsingToolbar()
     }
 
+    fun openArticleActivity(article: Article) {
+        startActivity(Intent(this, ArticleActivity::class.java))
+    }
+
     private fun initCollapsingToolbar() {
-        toolbarTitle = ""
+        toolbarTitle = category.title
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

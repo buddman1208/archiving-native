@@ -8,6 +8,7 @@ import com.samderra.archive.base.BaseVmActivity
 import com.samderra.archive.databinding.ActivityMainBinding
 import com.samderra.archive.ui.adapter.CategoryAdapter
 import com.samderra.archive.ui.adapter.CategorySearchAdapter
+import com.samderra.archive.ui.model.main.Category
 import com.samderra.archive.ui.view.category.CategoryActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -24,14 +25,19 @@ class MainActivity() : BaseVmActivity<ActivityMainBinding>(
                 DisplayMode.LIST -> LinearLayoutManager(this@MainActivity)
             }
         })
+        categoryOpenEvent.observe(lifecycleOwner, ::openCategoryActivity)
     }
 
     override fun initActivity() {
         viewModel.setObserves()
         binding.rvMain.adapter = CategoryAdapter(viewModel)
         binding.searchResultContainer.rvSearchResult.adapter = CategorySearchAdapter(viewModel)
+    }
+
+    private fun openCategoryActivity(category: Category) {
         startActivity(
             Intent(this, CategoryActivity::class.java)
+                .putExtra("category", category)
         )
     }
 
