@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -14,6 +15,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModel
 import com.samderra.archive.BR
 import com.samderra.archive.R
+import com.samderra.archive.util.observeEvent
 
 abstract class BaseVmActivity<T : ViewDataBinding>(
     @LayoutRes val layoutRes: Int,
@@ -29,12 +31,19 @@ abstract class BaseVmActivity<T : ViewDataBinding>(
     protected abstract val toolbarId: Int
     val lifecycleOwner: LifecycleOwner by lazy { this }
 
+    fun BaseViewModel.setDefaultObserves() {
+        messageEvent.observeEvent(lifecycleOwner) {
+            Toast.makeText(this@BaseVmActivity, it, Toast.LENGTH_SHORT).show()
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, layoutRes)
         bindVariables()
         initToolbarIfReady()
         initActivity()
+        viewModel.setDefaultObserves()
     }
 
     private fun initToolbarIfReady() {
