@@ -2,7 +2,7 @@ package com.samderra.archive.ui.model.article
 
 import java.util.*
 
-data class Article(
+data class SDRArticle(
     val articleId: Long,
     val thumbnailUrl: String,
     val linkUrl: String,
@@ -11,7 +11,7 @@ data class Article(
     val date: Date
 ) {
     companion object {
-        fun dummy(): Article = Article(
+        fun dummy(): SDRArticle = SDRArticle(
             articleId = System.currentTimeMillis(),
             thumbnailUrl = "https://s3.orbi.kr/data/file/united/91a82be58e2eca9ea11f7652104b6304.jpg",
             linkUrl = "https://mathflat.com",

@@ -8,7 +8,7 @@
 
         <variable
             name="item"
-            type="com.samderra.archive.ui.model.article.Article" />
+            type="com.samderra.archive.ui.model.article.SDRArticle" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -4,59 +4,73 @@ import androidx.databinding.BindingAdapter
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.samderra.archive.base.BaseViewModel
+import com.samderra.archive.data.remote.model.request.AuthTokenRequest
+import com.samderra.archive.data.remote.source.AuthDataSource
 import com.samderra.archive.ui.adapter.CategoryAdapter
 import com.samderra.archive.ui.adapter.CategorySearchAdapter
-import com.samderra.archive.ui.model.main.Category
+import com.samderra.archive.ui.model.main.SDRCategory
 import com.samderra.archive.util.Event
 import com.samderra.archive.util.emit
+import io.reactivex.rxkotlin.addTo
 
-class MainViewModel : BaseViewModel() {
+class MainViewModel(
+    private val authDataSource: AuthDataSource
+) : BaseViewModel() {
 
     val displayMode: MutableLiveData<DisplayMode> = MutableLiveData(DisplayMode.GRID)
     val searchQuery: MutableLiveData<String> = MutableLiveData("")
     val sortOption: MutableLiveData<SortOption> = MutableLiveData(SortOption.NAME)
 
-    val categoryOpenEvent: MutableLiveData<Category> = MutableLiveData()
+    val categoryOpenEvent: MutableLiveData<SDRCategory> = MutableLiveData()
     val event: MutableLiveData<Event<MainEvent>> = MutableLiveData()
 
     val categoryItems = listOf(
-
-        Category.dummy(),
-        Category.dummy(),
-        Category.dummy(),
-        Category.dummy(),
-        Category.dummy(),
-        Category.dummy(),
-        Category.dummy(),
-        Category.dummy(),
-        Category.dummy(),
-        Category.dummy(),
-        Category.dummy(),
-        Category.dummy(),
-        Category.dummy(),
-        Category.dummy()
+        SDRCategory.dummy(),
+        SDRCategory.dummy(),
+        SDRCategory.dummy(),
+        SDRCategory.dummy(),
+        SDRCategory.dummy(),
+        SDRCategory.dummy(),
+        SDRCategory.dummy(),
+        SDRCategory.dummy(),
+        SDRCategory.dummy(),
+        SDRCategory.dummy(),
+        SDRCategory.dummy(),
+        SDRCategory.dummy(),
+        SDRCategory.dummy(),
+        SDRCategory.dummy()
     )
 
-    val categorySearchResult = MutableLiveData<List<Category>>(
+    val categorySearchResult = MutableLiveData<List<SDRCategory>>(
         listOf(
-            Category.dummy(),
-            Category.dummy(),
-            Category.dummy(),
-            Category.dummy(),
-            Category.dummy(),
-            Category.dummy(),
-            Category.dummy(),
-            Category.dummy(),
-            Category.dummy(),
-            Category.dummy(),
-            Category.dummy(),
-            Category.dummy(),
-            Category.dummy(),
-            Category.dummy(),
-            Category.dummy(),
-            Category.dummy()
+            SDRCategory.dummy(),
+            SDRCategory.dummy(),
+            SDRCategory.dummy(),
+            SDRCategory.dummy(),
+            SDRCategory.dummy(),
+            SDRCategory.dummy(),
+            SDRCategory.dummy(),
+            SDRCategory.dummy(),
+            SDRCategory.dummy(),
+            SDRCategory.dummy(),
+            SDRCategory.dummy(),
+            SDRCategory.dummy(),
+            SDRCategory.dummy(),
+            SDRCategory.dummy(),
+            SDRCategory.dummy(),
+            SDRCategory.dummy()
         )
     )
+
+    init {
+        authDataSource
+            .getToken(AuthTokenRequest("0"))
+            .subscribe({
+                println(it.toString())
+                messageEvent.value = Event("${it.name}님 환영합니다.")
+            }, Throwable::printStackTrace)
+            .addTo(compositeDisposable)
+    }
 
     fun clearSearchQuery() {
         searchQuery.value = ""
@@ -74,7 +88,7 @@ class MainViewModel : BaseViewModel() {
         // todo
     }
 
-    fun openCategory(category: Category) {
+    fun openCategory(category: SDRCategory) {
         categoryOpenEvent.value = category
     }
 
@@ -93,14 +107,14 @@ class MainViewModel : BaseViewModel() {
     companion object {
         @JvmStatic
         @BindingAdapter("bindCategoryList")
-        fun bindCategoryList(rv: RecyclerView, categoryList: List<Category>) {
+        fun bindCategoryList(rv: RecyclerView, categoryList: List<SDRCategory>) {
             val adapter = rv.adapter as? CategoryAdapter?
             adapter?.updateItems(categoryList)
         }
 
         @JvmStatic
         @BindingAdapter("bindCategorySearchList")
-        fun bindCategorySearchList(rv: RecyclerView, categoryList: List<Category>) {
+        fun bindCategorySearchList(rv: RecyclerView, categoryList: List<SDRCategory>) {
             val adapter = rv.adapter as? CategorySearchAdapter?
             adapter?.updateItems(categoryList)
         }

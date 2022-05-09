@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="com.samderra.archive.ui.model.main.Category" />
+            type="com.samderra.archive.ui.model.main.SDRCategory" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

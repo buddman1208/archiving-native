@@ -7,8 +7,8 @@ import com.samderra.archive.R
 import com.samderra.archive.base.BaseVmActivity
 import com.samderra.archive.databinding.ActivityCategoryBinding
 import com.samderra.archive.ui.adapter.ArticleGridAdapter
-import com.samderra.archive.ui.model.article.Article
-import com.samderra.archive.ui.model.main.Category
+import com.samderra.archive.ui.model.article.SDRArticle
+import com.samderra.archive.ui.model.main.SDRCategory
 import com.samderra.archive.ui.view.article.ArticleActivity
 import com.samderra.archive.ui.view.main.SortOption
 import com.samderra.archive.util.observeEvent
@@ -19,8 +19,8 @@ class CategoryActivity() : BaseVmActivity<ActivityCategoryBinding>(
     CategoryViewModel::class.java
 ) {
 
-    private val category: Category by lazy {
-        intent.getSerializableExtra("category") as Category
+    private val category: SDRCategory by lazy {
+        intent.getSerializableExtra("category") as SDRCategory
     }
 
     fun CategoryViewModel.setObserves() {
@@ -38,7 +38,7 @@ class CategoryActivity() : BaseVmActivity<ActivityCategoryBinding>(
         initCollapsingToolbar()
     }
 
-    fun openArticleActivity(article: Article) {
+    fun openArticleActivity(article: SDRArticle) {
         Intent(this, ArticleActivity::class.java).run {
             putExtra("category", category)
             startActivity(this)

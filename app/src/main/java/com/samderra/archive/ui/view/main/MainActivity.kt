@@ -9,7 +9,7 @@ import com.samderra.archive.base.BaseVmActivity
 import com.samderra.archive.databinding.ActivityMainBinding
 import com.samderra.archive.ui.adapter.CategoryAdapter
 import com.samderra.archive.ui.adapter.CategorySearchAdapter
-import com.samderra.archive.ui.model.main.Category
+import com.samderra.archive.ui.model.main.SDRCategory
 import com.samderra.archive.ui.view.category.CategoryActivity
 import com.samderra.archive.util.observeEvent
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -29,11 +29,11 @@ class MainActivity() : BaseVmActivity<ActivityMainBinding>(
         }
         categoryOpenEvent.observe(lifecycleOwner, ::openCategoryActivity)
 
-        event.observeEvent(lifecycleOwner, {
+        event.observeEvent(lifecycleOwner) {
             when (it) {
                 MainEvent.OPEN_SORT_OPTIONS -> this@MainActivity.showSortOptions()
             }
-        })
+        }
     }
 
     override fun initActivity() {
@@ -51,7 +51,7 @@ class MainActivity() : BaseVmActivity<ActivityMainBinding>(
             .show()
     }
 
-    private fun openCategoryActivity(category: Category) {
+    private fun openCategoryActivity(category: SDRCategory) {
         startActivity(
             Intent(this, CategoryActivity::class.java)
                 .putExtra("category", category)

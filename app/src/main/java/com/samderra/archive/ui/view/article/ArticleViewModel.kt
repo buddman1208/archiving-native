@@ -4,31 +4,31 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.samderra.archive.base.BaseViewModel
 import com.samderra.archive.ui.adapter.ArticleListAdapter
-import com.samderra.archive.ui.model.article.Article
+import com.samderra.archive.ui.model.article.SDRArticle
 
 class ArticleViewModel : BaseViewModel() {
 
     val articleItems = listOf(
-        Article.dummy(),
-        Article.dummy(),
-        Article.dummy(),
-        Article.dummy(),
-        Article.dummy(),
-        Article.dummy(),
-        Article.dummy(),
-        Article.dummy(),
-        Article.dummy(),
-        Article.dummy(),
-        Article.dummy(),
-        Article.dummy(),
-        Article.dummy(),
-        Article.dummy()
+        SDRArticle.dummy(),
+        SDRArticle.dummy(),
+        SDRArticle.dummy(),
+        SDRArticle.dummy(),
+        SDRArticle.dummy(),
+        SDRArticle.dummy(),
+        SDRArticle.dummy(),
+        SDRArticle.dummy(),
+        SDRArticle.dummy(),
+        SDRArticle.dummy(),
+        SDRArticle.dummy(),
+        SDRArticle.dummy(),
+        SDRArticle.dummy(),
+        SDRArticle.dummy()
     )
 
     companion object {
         @JvmStatic
         @BindingAdapter("bindArticleList")
-        fun bindArticleList(rv: RecyclerView, articleList: List<Article>) {
+        fun bindArticleList(rv: RecyclerView, articleList: List<SDRArticle>) {
             val adapter = rv.adapter as? ArticleListAdapter?
             adapter?.updateItems(articleList)
         }

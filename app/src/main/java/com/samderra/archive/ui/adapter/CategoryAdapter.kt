@@ -10,7 +10,7 @@ import com.samderra.archive.base.BaseRecyclerAdapter
 import com.samderra.archive.databinding.ItemCategorySearchBinding
 import com.samderra.archive.databinding.ItemMainGridBinding
 import com.samderra.archive.databinding.ItemMainListBinding
-import com.samderra.archive.ui.model.main.Category
+import com.samderra.archive.ui.model.main.SDRCategory
 import com.samderra.archive.ui.view.main.DisplayMode
 import com.samderra.archive.ui.view.main.MainViewModel
 
@@ -61,7 +61,7 @@ class CategoryAdapter(
         holder.bind(items[position], vm)
     }
 
-    fun updateItems(updateItems: List<Category>) {
+    fun updateItems(updateItems: List<SDRCategory>) {
         val size = items.size
         items.clear()
         notifyItemRangeRemoved(0, size)
