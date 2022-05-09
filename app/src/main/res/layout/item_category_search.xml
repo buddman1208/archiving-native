@@ -26,7 +26,7 @@
         android:paddingTop="8dp"
         android:paddingEnd="16dp"
         android:paddingBottom="8dp"
-        tools:context=".ui.view.main.MainActivity">
+        tools:context=".ui.view.test.MainActivity">
 
 
         <ImageView

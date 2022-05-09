@@ -1,5 +1,6 @@
 package com.samderra.archive.base
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -12,6 +13,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModel
 import com.samderra.archive.BR
+import com.samderra.archive.R
 
 abstract class BaseVmActivity<T : ViewDataBinding>(
     @LayoutRes val layoutRes: Int,
@@ -39,11 +41,9 @@ abstract class BaseVmActivity<T : ViewDataBinding>(
         if (toolbarId != 0) {
             toolbar = findViewById<View>(toolbarId) as Toolbar
             setSupportActionBar(toolbar)
-//            toolbar.setTitleTextAppearance(this@BaseVmActivity, R.style.TextBold_20)
-//            toolbar.setSubtitleTextAppearance(this@BaseVmActivity, R.style.TextRegular_12_GhostPrimary)
-//            toolbar.setTitleTextColor(Color.BLACK)
-//            toolbar.setBackgroundColor(Color.WHITE)
-//            toolbar.contentInsetStartWithNavigation = 0
+            toolbar.setTitleTextAppearance(this@BaseVmActivity, R.style.UG_Medium)
+            toolbar.setTitleTextColor(Color.WHITE)
+            toolbar.contentInsetStartWithNavigation = 0
             supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         }
     }

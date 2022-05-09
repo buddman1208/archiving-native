@@ -15,13 +15,14 @@
             type="com.samderra.archive.ui.view.main.MainViewModel" />
 
         <import type="android.view.View" />
+        <import type="com.samderra.archive.ui.view.main.DisplayMode" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/darkgrey400"
-        tools:context=".ui.view.main.MainActivity">
+        tools:context=".ui.view.test.MainActivity">
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/toolbar"
@@ -58,7 +59,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawablePadding="4dp"
-                android:text="최근 저장 순"
+                android:onClick="@{() -> vm.showSortOptions()}"
+                android:text="@{@stringArray/sort_options[vm.sortOption.value]}"
                 android:textColor="@color/grey300"
                 app:drawableEndCompat="@drawable/ic_sort_grey" />
 
@@ -68,7 +70,7 @@
                 android:layout_marginStart="12dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:onClick="@{() -> vm.switchDisplayMode()}"
-                android:src="@drawable/ic_list_view_grey" />
+                android:src="@{vm.displayMode == DisplayMode.GRID ? @drawable/ic_grid_view_grey : @drawable/ic_list_view_grey}" />
 
             <androidx.appcompat.widget.AppCompatImageButton
                 android:layout_width="wrap_content"
@@ -96,7 +98,8 @@
         <include
             android:id="@+id/search_result_container"
             layout="@layout/layout_search_result"
-            app:vm="@{vm}" />
+            app:vm="@{vm}"
+            tools:visibility="gone" />
 
         <include
             android:id="@+id/search_container"
@@ -107,8 +110,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:visibility="@{vm.searchQuery.isEmpty ? View.VISIBLE : View.GONE}"
-            app:constraint_referenced_ids="rv_main,toolbar"
-            tools:visibility="gone" />
+            app:constraint_referenced_ids="rv_main,toolbar" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

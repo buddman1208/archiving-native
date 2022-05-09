@@ -3,7 +3,7 @@
 
     <style name="UG">
         <item name="android:letterSpacing">-0.021875</item>
-        <item name="android:includeFontPadding">false</item>
+        <item name="android:includeFontPadding">true</item>
     </style>
 
     <style name="UG.Medium">

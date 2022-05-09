@@ -22,7 +22,7 @@
         android:background="@color/darkgrey400"
         android:padding="8dp"
         android:onClick="@{() -> vm.openCategory(item)}"
-        tools:context=".ui.view.main.MainActivity">
+        tools:context=".ui.view.test.MainActivity">
 
 
         <ImageView

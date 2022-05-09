@@ -4,11 +4,18 @@
     <item
         android:id="@+id/menu_search"
         android:icon="@drawable/ic_search_white"
-        android:title="@string/text_search"
+        android:title="@string/text_category_search"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/menu_menu"
-        android:icon="@drawable/ic_menu_vert_white"
-        android:title="@string/text_search"
-        app:showAsAction="ifRoom" />
+        android:id="@+id/menu_category_delete"
+        android:title="@string/text_category_delete"
+        app:showAsAction="collapseActionView" />
+    <item
+        android:id="@+id/menu_category_edit"
+        android:title="@string/text_category_name_edit"
+        app:showAsAction="collapseActionView" />
+    <item
+        android:id="@+id/menu_category_delete_article"
+        android:title="@string/text_category_delete_article"
+        app:showAsAction="collapseActionView" />
 </menu>

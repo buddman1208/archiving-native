@@ -1,0 +1,9 @@
+<resources>
+    <string-array name="sort_options">
+        <item>이름 순</item>
+        <item>최근 저장 순</item>
+        <item>오래된 저장 순</item>
+        <item>가장 많이 본 순</item>
+        <item>가장 적게 본 순</item>
+    </string-array>
+</resources>

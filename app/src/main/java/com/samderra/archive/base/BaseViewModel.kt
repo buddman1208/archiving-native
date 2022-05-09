@@ -3,7 +3,7 @@ package com.samderra.archive.base
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.CompositeDisposable
-import org.koin.core.KoinComponent
+import org.koin.core.component.KoinComponent
 
 abstract class BaseViewModel : ViewModel(), KoinComponent {
     val compositeDisposable: CompositeDisposable by lazy(::CompositeDisposable)

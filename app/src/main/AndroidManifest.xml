@@ -26,6 +26,11 @@
         <activity
             android:name="com.samderra.archive.ui.view.article.ArticleActivity"
             android:exported="true" />
+        <activity
+            android:name="com.samderra.archive.ui.view.test.TestActivity"
+            android:exported="true">
+
+        </activity>
     </application>
 
 </manifest>

@@ -5,5 +5,9 @@
     <string name="search_category_result_none">찾으신 보관함은\n아직 등록되지 않았어요.</string>
     <string name="category_add_btn_format" formatted="false">+ \'%s\' 추가</string>
     <string name="current_exist_category">현재 있는 카테고리</string>
-    <string name="text_search">검색</string>
+
+    <string name="text_category_search">카테고리 검색</string>
+    <string name="text_category_delete">카테고리 삭제</string>
+    <string name="text_category_name_edit">카테고리명 수정</string>
+    <string name="text_category_delete_article">게시물 삭제</string>
 </resources>

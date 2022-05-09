@@ -2,6 +2,7 @@ package com.samderra.archive.ui.view.category
 
 import android.content.Intent
 import android.view.Menu
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.samderra.archive.R
 import com.samderra.archive.base.BaseVmActivity
 import com.samderra.archive.databinding.ActivityCategoryBinding
@@ -9,6 +10,8 @@ import com.samderra.archive.ui.adapter.ArticleGridAdapter
 import com.samderra.archive.ui.model.article.Article
 import com.samderra.archive.ui.model.main.Category
 import com.samderra.archive.ui.view.article.ArticleActivity
+import com.samderra.archive.ui.view.main.SortOption
+import com.samderra.archive.util.observeEvent
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CategoryActivity() : BaseVmActivity<ActivityCategoryBinding>(
@@ -22,6 +25,11 @@ class CategoryActivity() : BaseVmActivity<ActivityCategoryBinding>(
 
     fun CategoryViewModel.setObserves() {
         articleOpenEvent.observe(lifecycleOwner, ::openArticleActivity)
+        categoryActions.observeEvent(lifecycleOwner, {
+            when (it) {
+                CategoryActions.OPEN_SORT_OPTIONS -> this@CategoryActivity.showSortOptions()
+            }
+        })
     }
 
     override fun initActivity() {
@@ -31,11 +39,24 @@ class CategoryActivity() : BaseVmActivity<ActivityCategoryBinding>(
     }
 
     fun openArticleActivity(article: Article) {
-        startActivity(Intent(this, ArticleActivity::class.java))
+        Intent(this, ArticleActivity::class.java).run {
+            putExtra("category", category)
+            startActivity(this)
+        }
     }
 
+    private fun showSortOptions() {
+        MaterialAlertDialogBuilder(this@CategoryActivity)
+            .setTitle("정렬 순서")
+            .setItems(R.array.sort_options) { _, which ->
+                viewModel.changeSortOptions(SortOption.indexOf(which))
+            }
+            .show()
+    }
+
+
     private fun initCollapsingToolbar() {
-        toolbarTitle = category.title
+        viewModel.title.value = category.title
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
