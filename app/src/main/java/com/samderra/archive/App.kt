@@ -2,7 +2,11 @@ package com.samderra.archive
 
 import android.app.Application
 import android.content.Context
-import com.samderra.archive.ui.view.viewModelModule
+import com.samderra.archive.data.apiModule
+import com.samderra.archive.data.networkModule
+import com.samderra.archive.data.remote.repositoryModule
+import com.samderra.archive.data.remoteDataSourceModule
+import com.samderra.archive.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import org.koin.core.module.Module
@@ -18,10 +22,11 @@ class App : Application() {
     private fun setKoin() {
         setupKoin(
             this,
-//            networkModule,
-//            remoteDataSourceModule,
+            apiModule,
+            networkModule,
+            remoteDataSourceModule,
 //            localDataSourceModule,
-//            repositoryModule,
+            repositoryModule,
             viewModelModule
         )
     }
