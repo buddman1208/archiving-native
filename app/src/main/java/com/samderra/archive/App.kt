@@ -2,10 +2,10 @@ package com.samderra.archive
 
 import android.app.Application
 import android.content.Context
-import com.samderra.archive.data.apiModule
-import com.samderra.archive.data.networkModule
 import com.samderra.archive.data.remote.repositoryModule
-import com.samderra.archive.data.remoteDataSourceModule
+import com.samderra.archive.di.apiModule
+import com.samderra.archive.di.networkModule
+import com.samderra.archive.di.remoteDataSourceModule
 import com.samderra.archive.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin

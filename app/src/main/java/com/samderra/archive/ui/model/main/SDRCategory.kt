@@ -1,6 +1,5 @@
 package com.samderra.archive.ui.model.main
 
-import com.samderra.archive.data.remote.model.Category
 import java.io.Serializable
 import kotlin.random.Random
 
@@ -8,17 +7,10 @@ data class SDRCategory(
     val id: Long,
     val title: String,
     val contentSize: Int,
-    val thumbnailUrl: String
+    val thunbnail: String
 ) : Serializable {
 
     companion object {
-        fun fromDto(category: Category): SDRCategory = SDRCategory(
-            id = category.id,
-            title = category.name,
-            contentSize = category.count,
-            thumbnailUrl = category.thumbnail
-        )
-
         fun dummy(): SDRCategory = SDRCategory(
             Random.nextLong(),
             "인테리어",

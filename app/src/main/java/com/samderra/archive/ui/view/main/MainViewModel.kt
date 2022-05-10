@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.samderra.archive.base.BaseViewModel
 import com.samderra.archive.data.remote.model.request.AuthTokenRequest
 import com.samderra.archive.data.remote.source.AuthDataSource
+import com.samderra.archive.data.remote.source.CategoryDataSource
 import com.samderra.archive.ui.adapter.CategoryAdapter
 import com.samderra.archive.ui.adapter.CategorySearchAdapter
 import com.samderra.archive.ui.model.main.SDRCategory
@@ -14,7 +15,8 @@ import com.samderra.archive.util.emit
 import io.reactivex.rxkotlin.addTo
 
 class MainViewModel(
-    private val authDataSource: AuthDataSource
+    private val authDataSource: AuthDataSource,
+    private val categoryDataSource: CategoryDataSource
 ) : BaseViewModel() {
 
     val displayMode: MutableLiveData<DisplayMode> = MutableLiveData(DisplayMode.GRID)
@@ -24,22 +26,7 @@ class MainViewModel(
     val categoryOpenEvent: MutableLiveData<SDRCategory> = MutableLiveData()
     val event: MutableLiveData<Event<MainEvent>> = MutableLiveData()
 
-    val categoryItems = listOf(
-        SDRCategory.dummy(),
-        SDRCategory.dummy(),
-        SDRCategory.dummy(),
-        SDRCategory.dummy(),
-        SDRCategory.dummy(),
-        SDRCategory.dummy(),
-        SDRCategory.dummy(),
-        SDRCategory.dummy(),
-        SDRCategory.dummy(),
-        SDRCategory.dummy(),
-        SDRCategory.dummy(),
-        SDRCategory.dummy(),
-        SDRCategory.dummy(),
-        SDRCategory.dummy()
-    )
+    val categoryItems: MutableLiveData<List<SDRCategory>> = MutableLiveData(listOf())
 
     val categorySearchResult = MutableLiveData<List<SDRCategory>>(
         listOf(
@@ -68,6 +55,13 @@ class MainViewModel(
             .subscribe({
                 println(it.toString())
                 messageEvent.value = Event("${it.name}님 환영합니다.")
+            }, Throwable::printStackTrace)
+            .addTo(compositeDisposable)
+
+
+        categoryDataSource.getCategories()
+            .subscribe({
+                categoryItems.value = it
             }, Throwable::printStackTrace)
             .addTo(compositeDisposable)
     }

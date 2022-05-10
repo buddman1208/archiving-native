@@ -1,4 +1,4 @@
-package com.samderra.archive.data
+package com.samderra.archive.di
 
 import com.google.gson.GsonBuilder
 import com.samderra.archive.data.remote.Api
