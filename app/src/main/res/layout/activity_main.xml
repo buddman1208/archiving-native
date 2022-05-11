@@ -51,7 +51,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_weight="1"
-                android:text="32"
+                android:text="@{vm.categoryItems.size() + ``}"
                 android:textColor="@color/grey200" />
 
             <TextView
@@ -94,6 +94,16 @@
             bind:bindCategoryList="@{vm.categoryItems}"
             tools:itemCount="20"
             tools:listitem="@layout/item_main_list" />
+
+        <TextView
+            android:id="@+id/tv_no_items"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="@string/text_no_category"
+            android:visibility="@{vm.categoryItems.size() == 0 ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="@id/rv_main"
+            app:layout_constraintTop_toTopOf="@id/rv_main" />
 
         <include
             android:id="@+id/search_result_container"
