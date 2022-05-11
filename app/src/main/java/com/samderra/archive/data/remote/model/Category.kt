@@ -14,6 +14,6 @@ fun Category.toSDRCategory(): SDRCategory {
         id = this.id,
         title = this.name,
         contentSize = this.count,
-        thunbnail = this.thumbnail
+        thumbnail = this.thumbnail
     )
 }
