@@ -4,11 +4,12 @@ import java.util.*
 
 interface SDRPreference {
     interface UserInfo {
-        val id: Long
-        val userId: Long
-        val name: String
-        val description: String
-        val createdAt: Date
+        var token: String
+        var id: Long
+        var userId: Long
+        var name: String
+        var description: String
+        var createdAt: Date
 
         fun clearPref()
     }
