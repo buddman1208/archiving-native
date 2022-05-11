@@ -7,7 +7,7 @@ data class SDRCategory(
     val id: Long,
     val title: String,
     val contentSize: Int,
-    val thunbnail: String
+    val thumbnail: String
 ) : Serializable {
 
     companion object {
