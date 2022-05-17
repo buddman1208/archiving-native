@@ -3,10 +3,7 @@ package com.samderra.archive
 import android.app.Application
 import android.content.Context
 import com.samderra.archive.data.remote.repositoryModule
-import com.samderra.archive.di.apiModule
-import com.samderra.archive.di.networkModule
-import com.samderra.archive.di.remoteDataSourceModule
-import com.samderra.archive.di.viewModelModule
+import com.samderra.archive.di.*
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import org.koin.core.module.Module
@@ -25,7 +22,7 @@ class App : Application() {
             apiModule,
             networkModule,
             remoteDataSourceModule,
-//            localDataSourceModule,
+            localDataSourceModule,
             repositoryModule,
             viewModelModule
         )

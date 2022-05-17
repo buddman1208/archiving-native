@@ -21,6 +21,7 @@
         android:layout_height="wrap_content"
         android:background="@color/darkgrey400"
         android:padding="8dp"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
         android:onClick="@{() -> vm.openCategory(item)}"
         tools:context=".ui.view.test.MainActivity">
 

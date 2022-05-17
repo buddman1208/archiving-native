@@ -8,10 +8,8 @@ class HeaderInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val builder = chain.request().newBuilder()
         val token = PreferenceManager.userPref.token
-        builder.removeHeader("token")
-        builder.addHeader("x-auth-token", "token")
-        builder.removeHeader("x-platform")
-        builder.addHeader("x-platform", "ANDROID")
+        builder.removeHeader("Authorization")
+        builder.addHeader("Authorization", "Bearer $token")
         return chain.proceed(builder.build())
     }
 }
