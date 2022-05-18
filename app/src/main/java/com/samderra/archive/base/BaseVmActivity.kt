@@ -14,6 +14,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModel
 import com.samderra.archive.BR
+import com.samderra.archive.BuildConfig
 import com.samderra.archive.R
 import com.samderra.archive.util.observeEvent
 
@@ -34,6 +35,12 @@ abstract class BaseVmActivity<T : ViewDataBinding>(
     fun BaseViewModel.setDefaultObserves() {
         messageEvent.observeEvent(lifecycleOwner) {
             Toast.makeText(this@BaseVmActivity, it, Toast.LENGTH_SHORT).show()
+        }
+        errorMessageEvent.observeEvent(lifecycleOwner) {
+            // todo log to crashlytics
+            if (BuildConfig.DEBUG) {
+                Toast.makeText(this@BaseVmActivity, it, Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
