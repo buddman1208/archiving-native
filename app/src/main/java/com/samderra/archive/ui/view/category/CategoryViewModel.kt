@@ -4,35 +4,32 @@ import androidx.databinding.BindingAdapter
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.samderra.archive.base.BaseViewModel
+import com.samderra.archive.data.remote.source.ArticleDataSource
 import com.samderra.archive.ui.adapter.ArticleGridAdapter
 import com.samderra.archive.ui.model.article.SDRArticle
+import com.samderra.archive.ui.model.main.SDRCategory
 import com.samderra.archive.ui.view.main.SortOption
 import com.samderra.archive.util.Event
 
-class CategoryViewModel : BaseViewModel() {
+class CategoryViewModel(
+    private val articleDataSource: ArticleDataSource
+) : BaseViewModel() {
 
     val articleOpenEvent = MutableLiveData<SDRArticle>()
     val categoryActions = MutableLiveData<Event<CategoryActions>>()
     val sortOption: MutableLiveData<SortOption> = MutableLiveData(SortOption.NAME)
 
-    val title: MutableLiveData<String> = MutableLiveData("")
+    val category: MutableLiveData<SDRCategory> = MutableLiveData()
 
-    val articleItems = listOf(
-        SDRArticle.dummy(),
-        SDRArticle.dummy(),
-        SDRArticle.dummy(),
-        SDRArticle.dummy(),
-        SDRArticle.dummy(),
-        SDRArticle.dummy(),
-        SDRArticle.dummy(),
-        SDRArticle.dummy(),
-        SDRArticle.dummy(),
-        SDRArticle.dummy(),
-        SDRArticle.dummy(),
-        SDRArticle.dummy(),
-        SDRArticle.dummy(),
-        SDRArticle.dummy()
-    )
+    val articleItems: MutableLiveData<List<SDRArticle>> = MutableLiveData(listOf())
+
+    fun init() {
+        articleDataSource
+            .getArticlesByCategory(category.value?.id ?: 0.toLong())
+            .subscribeAuto {
+                articleItems.value = it
+            }
+    }
 
     fun showSortOptions() {
         categoryActions.value = Event(CategoryActions.OPEN_SORT_OPTIONS)
