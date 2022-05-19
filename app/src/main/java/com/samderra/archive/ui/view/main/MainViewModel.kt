@@ -13,7 +13,6 @@ import com.samderra.archive.ui.adapter.CategorySearchAdapter
 import com.samderra.archive.ui.model.main.SDRCategory
 import com.samderra.archive.util.Event
 import com.samderra.archive.util.emit
-import io.reactivex.rxkotlin.addTo
 
 class MainViewModel(
     private val authDataSource: AuthDataSource,
@@ -51,21 +50,18 @@ class MainViewModel(
     )
 
     init {
+        PreferenceManager.userPref.token = ""
         authDataSource
             .getToken(AuthTokenRequest("0"))
-            .subscribe({
+            .doOnNext {
                 println(it.toString())
                 messageEvent.value = Event("${it.name}님 환영합니다.")
                 PreferenceManager.userPref.token = it.token
-            }, Throwable::printStackTrace)
-            .addTo(compositeDisposable)
-
-
-        categoryDataSource.getCategories()
-            .subscribe({
+            }
+            .flatMap { categoryDataSource.getCategories() }
+            .subscribeAuto {
                 categoryItems.value = it
-            }, Throwable::printStackTrace)
-            .addTo(compositeDisposable)
+            }
     }
 
     fun clearSearchQuery() {
