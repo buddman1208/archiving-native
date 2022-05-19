@@ -25,11 +25,11 @@ class CategoryActivity() : BaseVmActivity<ActivityCategoryBinding>(
 
     fun CategoryViewModel.setObserves() {
         articleOpenEvent.observe(lifecycleOwner, ::openArticleActivity)
-        categoryActions.observeEvent(lifecycleOwner, {
+        categoryActions.observeEvent(lifecycleOwner) {
             when (it) {
                 CategoryActions.OPEN_SORT_OPTIONS -> this@CategoryActivity.showSortOptions()
             }
-        })
+        }
     }
 
     override fun initActivity() {
@@ -56,7 +56,8 @@ class CategoryActivity() : BaseVmActivity<ActivityCategoryBinding>(
 
 
     private fun initCollapsingToolbar() {
-        viewModel.title.value = category.title
+        viewModel.category.value = category
+        viewModel.init()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
