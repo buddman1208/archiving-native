@@ -9,7 +9,9 @@ class HeaderInterceptor : Interceptor {
         val builder = chain.request().newBuilder()
         val token = PreferenceManager.userPref.token
         builder.removeHeader("Authorization")
-        builder.addHeader("Authorization", "Bearer $token")
+        if (token.isNotEmpty()) {
+            builder.addHeader("Authorization", "Bearer $token")
+        }
         return chain.proceed(builder.build())
     }
 }
