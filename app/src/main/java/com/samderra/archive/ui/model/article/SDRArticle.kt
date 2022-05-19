@@ -1,14 +1,12 @@
 package com.samderra.archive.ui.model.article
 
-import java.util.*
-
 data class SDRArticle(
     val articleId: Long,
     val thumbnailUrl: String,
     val linkUrl: String,
     val name: String = "",
     val description: String,
-    val createdAt: Date
+    val createdAt: String
 ) {
     companion object {
         fun dummy(): SDRArticle = SDRArticle(
@@ -17,7 +15,8 @@ data class SDRArticle(
             linkUrl = "https://mathflat.com",
             name = "내일부터 갓생을 살겠습니다",
             description = "의지는 있나요? 의지는 있나요? 의지는 있나요? 의지는 있나요? 의지는 있나요? 의지는 있나요?",
-            createdAt = Date(System.currentTimeMillis())
+//            createdAt = Date(System.currentTimeMillis())
+            createdAt = "Date(System.currentTimeMillis())"
         )
     }
 }

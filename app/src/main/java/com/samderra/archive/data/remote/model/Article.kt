@@ -2,7 +2,6 @@ package com.samderra.archive.data.remote.model
 
 import com.google.gson.annotations.SerializedName
 import com.samderra.archive.ui.model.article.SDRArticle
-import java.util.*
 
 data class Article(
     @SerializedName("id")
@@ -11,7 +10,8 @@ data class Article(
     val categoryIds: List<Long>,
     val name: String,
     val description: String,
-    val createdAt: Date
+    // todo change variable type to Date
+    val createdAt: String
 )
 
 fun Article.toSDRArticle(): SDRArticle {
