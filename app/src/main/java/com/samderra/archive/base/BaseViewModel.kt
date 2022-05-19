@@ -4,8 +4,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.samderra.archive.util.Event
 import io.reactivex.Observable
+import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
+import io.reactivex.rxkotlin.addTo
 import org.koin.core.component.KoinComponent
 
 abstract class BaseViewModel : ViewModel(), KoinComponent {
@@ -38,8 +40,19 @@ abstract class BaseViewModel : ViewModel(), KoinComponent {
 
     fun <T> Observable<T>.subscribeAuto(onNext: (T) -> Unit): Disposable {
         return this
-            .subscribe(onNext, {
-                errorMessageEvent.value = it.message
-            })
+            .subscribe(onNext) {
+                it.printStackTrace()
+                errorMessageEvent.value = Event(it.message ?: "")
+            }
+            .addTo(compositeDisposable)
+    }
+
+    fun <T> Single<T>.subscribeAuto(onNext: (T) -> Unit): Disposable {
+        return this
+            .subscribe(onNext) {
+                it.printStackTrace()
+                errorMessageEvent.value = Event(it.message ?: "")
+            }
+            .addTo(compositeDisposable)
     }
 }
