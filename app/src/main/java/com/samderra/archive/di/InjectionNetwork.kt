@@ -39,7 +39,6 @@ val networkModule = module {
             .excludeFieldsWithoutExposeAnnotation()
             .create()
     }
-
     single {
         OkHttpClient.Builder()
             .connectTimeout(60, TimeUnit.SECONDS)
@@ -63,6 +62,4 @@ val networkModule = module {
             .addConverterFactory(get<GsonConverterFactory>())
             .build()
     }
-
-//    single<LoginApi> { get<Retrofit>().create(LoginApi::class.java) }
 }
