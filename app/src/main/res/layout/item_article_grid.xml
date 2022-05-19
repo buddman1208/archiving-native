@@ -57,7 +57,7 @@
                 android:layout_weight="1"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:text="@{item.title}"
+                android:text="@{item.name}"
                 android:textColor="@color/white"
                 tools:text="Title" />
 
@@ -69,7 +69,7 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:text="@{item.content}"
+                android:text="@{item.description}"
                 android:textColor="@color/lightgrey200"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

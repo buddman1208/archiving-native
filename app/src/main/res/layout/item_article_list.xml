@@ -61,7 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:ellipsize="end"
-            android:text="@{item.title}"
+            android:text="@{item.name}"
             android:textColor="@color/white"
             app:layout_constraintTop_toBottomOf="@id/iv_delete"
             tools:text="Title" />
@@ -74,7 +74,7 @@
             android:layout_margin="8dp"
             android:layout_weight="1"
             android:ellipsize="end"
-            android:text="@{item.content}"
+            android:text="@{item.description}"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_title"
