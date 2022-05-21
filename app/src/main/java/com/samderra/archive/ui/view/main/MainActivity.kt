@@ -1,6 +1,7 @@
 package com.samderra.archive.ui.view.main
 
 import android.content.Intent
+import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -19,6 +20,7 @@ class MainActivity() : BaseVmActivity<ActivityMainBinding>(
     R.layout.activity_main,
     MainViewModel::class.java
 ) {
+    private var lastPressedTime: Long = System.currentTimeMillis()
 
     private fun MainViewModel.setObserves() {
         displayMode.observe(lifecycleOwner) {
@@ -60,6 +62,13 @@ class MainActivity() : BaseVmActivity<ActivityMainBinding>(
             Intent(this, CategoryActivity::class.java)
                 .putExtra("category", category)
         )
+    }
+
+    override fun onBackPressed() {
+        if (System.currentTimeMillis() - lastPressedTime > 1000L) {
+            Toast.makeText(this@MainActivity, "다시 한 번 누르면 종료됩니다.", Toast.LENGTH_SHORT).show()
+            lastPressedTime = System.currentTimeMillis()
+        } else finish()
     }
 
     override val viewModel: MainViewModel by viewModel()
