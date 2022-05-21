@@ -11,6 +11,7 @@ import com.samderra.archive.ui.adapter.CategoryAdapter
 import com.samderra.archive.ui.adapter.CategorySearchAdapter
 import com.samderra.archive.ui.model.main.SDRCategory
 import com.samderra.archive.ui.view.category.CategoryActivity
+import com.samderra.archive.ui.view.tutorial.TutorialActivity
 import com.samderra.archive.util.observeEvent
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -37,6 +38,9 @@ class MainActivity() : BaseVmActivity<ActivityMainBinding>(
     }
 
     override fun initActivity() {
+        startActivity(
+            Intent(this@MainActivity, TutorialActivity::class.java)
+        )
         viewModel.setObserves()
         binding.rvMain.adapter = CategoryAdapter(viewModel)
         binding.searchResultContainer.rvSearchResult.adapter = CategorySearchAdapter(viewModel)

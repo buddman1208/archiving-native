@@ -34,20 +34,24 @@
         <item name="android:fontFamily">@font/pretendard_bold</item>
     </style>
 
-    
+
     <!-- UG -->
     <style name="UG.Bold.32">
         <item name="android:textSize">32sp</item>
     </style>
-    
+
+    <style name="UG.Bold.26">
+        <item name="android:textSize">26sp</item>
+    </style>
+
     <style name="UG.Bold.20">
         <item name="android:textSize">20sp</item>
     </style>
-    
+
     <style name="UG.Bold.18">
         <item name="android:textSize">18sp</item>
     </style>
-    
+
     <style name="UG.Bold.16">
         <item name="android:textSize">16sp</item>
     </style>

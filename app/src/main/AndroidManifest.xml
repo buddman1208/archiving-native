@@ -13,7 +13,8 @@
         android:theme="@style/Theme.Archive">
         <activity
             android:name="com.samderra.archive.ui.view.main.MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:launchMode="singleInstance">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,6 +29,11 @@
             android:exported="true" />
         <activity
             android:name="com.samderra.archive.ui.view.test.TestActivity"
+            android:exported="true">
+
+        </activity>
+        <activity
+            android:name="com.samderra.archive.ui.view.tutorial.TutorialActivity"
             android:exported="true">
 
         </activity>

@@ -56,6 +56,7 @@ class CategoryActivity() : BaseVmActivity<ActivityCategoryBinding>(
 
 
     private fun initCollapsingToolbar() {
+        toolbarTitle = ""
         viewModel.category.value = category
         viewModel.init()
     }
