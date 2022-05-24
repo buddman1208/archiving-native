@@ -9,6 +9,7 @@ import com.samderra.archive.R
 fun ImageView.loadImageFromUrl(url: String) {
     Glide.with(this)
         .load(url)
-        .error(R.drawable.m550d)
+        .placeholder(R.drawable.mango)
+        .error(R.drawable.mango)
         .into(this)
 }
