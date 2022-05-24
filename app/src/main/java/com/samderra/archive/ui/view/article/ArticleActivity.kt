@@ -21,7 +21,11 @@ class ArticleActivity() : BaseVmActivity<ActivityArticleBinding>(
     }
 
     override fun initActivity() {
-        viewModel.setObserves()
+        viewModel.run {
+            setObserves()
+            categoryId = category.id
+            initData()
+        }
         binding.rvArticle.adapter = ArticleListAdapter(viewModel)
         toolbarTitle = category.title
     }

@@ -47,24 +47,11 @@
                     android:paddingTop="4dp"
                     android:paddingEnd="4dp"
                     android:paddingBottom="2dp"
-                    android:text="43"
+                    android:text="@{vm.articleItems.size()}"
                     android:textColor="#000" />
 
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.AppBarLayout>
-
-
-        <TextView
-            android:id="@+id/tv_sort"
-            style="@style/Pretendard.Light.14"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:text="최근 저장 순"
-            android:textColor="@color/grey300"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_title" />
 
 
         <androidx.recyclerview.widget.RecyclerView
