@@ -56,6 +56,19 @@
             app:layout_constraintStart_toEndOf="@id/iv_delete"
             app:layout_constraintTop_toTopOf="@id/iv_delete" />
 
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_export"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:padding="8dp"
+            android:src="@drawable/ic_export_white"
+            app:layout_constraintBottom_toBottomOf="@id/iv_edit"
+            app:layout_constraintStart_toEndOf="@id/iv_edit"
+            app:layout_constraintTop_toTopOf="@id/iv_edit" />
+
 
         <TextView
             android:id="@+id/tv_title"
