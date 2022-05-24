@@ -82,7 +82,7 @@
             app:layout_constraintEnd_toEndOf="@id/guideline_end"
             app:layout_constraintStart_toStartOf="@id/guideline_start"
             app:layout_constraintTop_toBottomOf="@id/iv_delete"
-            tools:text="Title" />
+            tools:text="This is title" />
 
         <TextView
             android:id="@+id/tv_content"
@@ -97,7 +97,7 @@
             app:layout_constraintEnd_toEndOf="@id/guideline_end"
             app:layout_constraintStart_toStartOf="@id/guideline_start"
             app:layout_constraintTop_toBottomOf="@id/tv_title"
-            tools:text="Title" />
+            tools:text="This is content" />
 
         <TextView
             android:id="@+id/tv_date"
@@ -112,7 +112,7 @@
             app:layout_constraintEnd_toEndOf="@id/guideline_end"
             app:layout_constraintStart_toStartOf="@id/guideline_start"
             app:layout_constraintTop_toBottomOf="@id/tv_content"
-            tools:text="Title" />
+            tools:text="This is date" />
 
         <Space
             android:id="@+id/space"
