@@ -56,3 +56,4 @@ abstract class BaseViewModel : ViewModel(), KoinComponent {
             .addTo(compositeDisposable)
     }
 }
+

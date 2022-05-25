@@ -16,4 +16,11 @@ class ArticleDataSource(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
+
+    fun deleteArticles(targetArticleIds: List<Long>): Observable<Boolean> {
+        return articleApi.deleteArticles(targetArticleIds)
+            .map { it.result }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
 }

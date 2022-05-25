@@ -58,7 +58,11 @@ class CategoryActivity() : BaseVmActivity<ActivityCategoryBinding>(
     private fun initCollapsingToolbar() {
         toolbarTitle = ""
         viewModel.category.value = category
-        viewModel.init()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.initData()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

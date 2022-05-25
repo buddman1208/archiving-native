@@ -44,10 +44,9 @@
                     android:layout_marginBottom="2dp"
                     android:background="@drawable/bg_chip_green2"
                     android:paddingStart="4dp"
-                    android:paddingTop="4dp"
                     android:paddingEnd="4dp"
                     android:paddingBottom="2dp"
-                    android:text="@{vm.articleItems.size()}"
+                    android:text="@{String.valueOf(vm.articleItems.size())}"
                     android:textColor="#000" />
 
             </androidx.appcompat.widget.Toolbar>

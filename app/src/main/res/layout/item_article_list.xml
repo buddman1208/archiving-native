@@ -7,6 +7,10 @@
     <data>
 
         <variable
+            name="vm"
+            type="com.samderra.archive.ui.view.article.ArticleViewModel" />
+
+        <variable
             name="item"
             type="com.samderra.archive.ui.model.article.SDRArticle" />
     </data>
@@ -38,6 +42,7 @@
             android:layout_marginTop="8dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:clickable="true"
+            android:onClick="@{() -> vm.requestDeleteArticle(item)}"
             android:padding="8dp"
             android:src="@drawable/ic_trash_white"
             app:layout_constraintStart_toStartOf="@id/guideline_start"

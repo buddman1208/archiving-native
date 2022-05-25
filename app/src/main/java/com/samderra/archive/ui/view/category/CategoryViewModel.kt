@@ -23,7 +23,7 @@ class CategoryViewModel(
 
     val articleItems: MutableLiveData<List<SDRArticle>> = MutableLiveData(listOf())
 
-    fun init() {
+    fun initData() {
         articleDataSource
             .getArticlesByCategory(category.value?.id ?: 0.toLong())
             .subscribeAuto {
