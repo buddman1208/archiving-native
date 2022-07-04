@@ -1,9 +1,18 @@
 <resources>
+    <string-array name="main_settings_gridview">
+        <item>카테고리 정렬</item>
+        <item>썸네일뷰로 보기</item>
+        <item>카테고리 삭제</item>
+    </string-array>
+    <string-array name="main_settings_listview">
+        <item>카테고리 정렬</item>
+        <item>리스트뷰로 보기</item>
+        <item>카테고리 삭제</item>
+    </string-array>
     <string-array name="sort_options">
         <item>이름 순</item>
         <item>최근 저장 순</item>
         <item>오래된 저장 순</item>
-        <item>가장 많이 본 순</item>
-        <item>가장 적게 본 순</item>
+        <item>최근에 본 순</item>
     </string-array>
 </resources>

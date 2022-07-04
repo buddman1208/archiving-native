@@ -1,5 +1,6 @@
 package com.samderra.archive.ui.model.main
 
+import androidx.databinding.ObservableBoolean
 import java.io.Serializable
 import kotlin.random.Random
 
@@ -9,6 +10,8 @@ data class SDRCategory(
     val contentSize: Int,
     val thumbnail: String
 ) : Serializable {
+
+    val isChecked: ObservableBoolean = ObservableBoolean(false)
 
     companion object {
         fun dummy(): SDRCategory = SDRCategory(

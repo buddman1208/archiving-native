@@ -5,6 +5,7 @@
     <string name="search_category_result_none">찾으신 보관함은\n아직 등록되지 않았어요.</string>
     <string name="category_add_btn_format" formatted="false">+ \'%s\' 추가</string>
     <string name="current_exist_category">현재 있는 카테고리</string>
+    <string name="category_delete_btn_format" formatted="false">%d 카테고리 삭제</string>
 
     <string name="text_category_search">카테고리 검색</string>
     <string name="text_category_delete">카테고리 삭제</string>
@@ -23,4 +24,8 @@
     <string name="text_next">다음</string>
     <string name="text_tutorial_start">바로 시작하기</string>
     <string name="text_article_delete">게시물 삭제</string>
+    <string name="text_no_article">게시물이 없습니다.</string>
+    <string name="text_category_to_search_or_add">찾고 싶거나 추가하고 싶은 보관함</string>
+    <string name="text_cancel">취소</string>
+    <string name="double_tap_to_exit">다시 한 번 누르면 종료됩니다.</string>
 </resources>

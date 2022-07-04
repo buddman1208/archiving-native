@@ -50,6 +50,10 @@ abstract class BaseRecyclerAdapter<ITEM, BINDING : ViewDataBinding>(
             }
         }
 
+        fun bindVariable(key: Int, variable: Any) {
+            binding.setVariable(key, variable)
+        }
+
     }
 
 }

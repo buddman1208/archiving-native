@@ -15,6 +15,7 @@
             type="com.samderra.archive.ui.view.main.MainViewModel" />
 
         <import type="android.view.View" />
+
         <import type="com.samderra.archive.ui.view.main.DisplayMode" />
     </data>
 
@@ -54,30 +55,22 @@
                 android:text="@{vm.categoryItems.size() + ``}"
                 android:textColor="@color/grey200" />
 
-            <TextView
-                style="@style/Pretendard.Light.14"
+            <androidx.appcompat.widget.AppCompatImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawablePadding="4dp"
-                android:onClick="@{() -> vm.showSortOptions()}"
-                android:text="@{@stringArray/sort_options[vm.sortOption.value]}"
-                android:textColor="@color/grey300"
-                app:drawableEndCompat="@drawable/ic_sort_grey" />
+                android:layout_marginStart="12dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_add_white"
+                android:visibility="@{vm.isDeleteMode() ? View.GONE : View.VISIBLE}" />
 
             <androidx.appcompat.widget.AppCompatImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:onClick="@{() -> vm.switchDisplayMode()}"
-                android:src="@{vm.displayMode == DisplayMode.GRID ? @drawable/ic_grid_view_grey : @drawable/ic_list_view_grey}" />
-
-            <androidx.appcompat.widget.AppCompatImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/ic_trash" />
+                android:onClick="@{() -> vm.showMainOptions()}"
+                android:src="@drawable/ic_setting_white"
+                android:visibility="@{vm.isDeleteMode() ? View.GONE : View.VISIBLE}" />
 
 
         </androidx.appcompat.widget.LinearLayoutCompat>
@@ -89,7 +82,7 @@
             android:layout_marginTop="16dp"
             android:clipToPadding="false"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toTopOf="@id/search_container"
+            app:layout_constraintBottom_toTopOf="@id/bottom_option_container"
             app:layout_constraintTop_toBottomOf="@id/toolbar"
             bind:bindCategoryList="@{vm.categoryItems}"
             tools:itemCount="20"
@@ -111,10 +104,26 @@
             app:vm="@{vm}"
             tools:visibility="gone" />
 
-        <include
-            android:id="@+id/search_container"
-            layout="@layout/layout_search"
-            app:vm="@{vm}" />
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/bottom_option_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <include
+                android:id="@+id/search_container"
+                layout="@layout/layout_main_search"
+                app:vm="@{vm}" />
+
+            <include
+                android:id="@+id/category_delete_container"
+                layout="@layout/layout_main_category_delete"
+                app:vm="@{vm}"
+                tools:visibility="gone" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
         <androidx.constraintlayout.widget.Group
             android:layout_width="0dp"

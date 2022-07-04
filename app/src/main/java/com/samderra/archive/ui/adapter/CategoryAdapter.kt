@@ -4,7 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ObservableArrayList
+import androidx.databinding.ObservableBoolean
 import androidx.recyclerview.widget.RecyclerView
+import com.samderra.archive.BR
 import com.samderra.archive.R
 import com.samderra.archive.base.BaseRecyclerAdapter
 import com.samderra.archive.databinding.ItemCategorySearchBinding
@@ -19,11 +21,14 @@ class CategoryAdapter(
 ) : RecyclerView.Adapter<BaseRecyclerAdapter.ViewHolder>() {
     private val items = ObservableArrayList<Any>()
     private var displayMode: DisplayMode = DisplayMode.GRID
+    private val isDeleteMode: ObservableBoolean = ObservableBoolean(false)
 
     fun updateDisplayMode(mode: DisplayMode) {
         displayMode = mode
         notifyDataSetChanged()
     }
+
+    fun updateDeleteMode(value: Boolean) = isDeleteMode.set(value)
 
     override fun getItemViewType(position: Int): Int {
         return displayMode.ordinal
@@ -59,6 +64,7 @@ class CategoryAdapter(
 
     override fun onBindViewHolder(holder: BaseRecyclerAdapter.ViewHolder, position: Int) {
         holder.bind(items[position], vm)
+        holder.bindVariable(BR.isDeleteMode, isDeleteMode)
     }
 
     fun updateItems(updateItems: List<SDRCategory>) {

@@ -14,15 +14,21 @@
             name="vm"
             type="com.samderra.archive.ui.view.main.MainViewModel" />
 
+        <variable
+            name="isDeleteMode"
+            type="androidx.databinding.ObservableBoolean" />
+
+        <import type="android.view.View" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/darkgrey400"
-        android:padding="8dp"
         android:foreground="?attr/selectableItemBackgroundBorderless"
-        android:onClick="@{() -> vm.openCategory(item)}"
+        android:onClick="@{() -> vm.onCategoryClicked(item)}"
+        android:padding="8dp"
         tools:context=".ui.view.test.MainActivity">
 
 
@@ -65,6 +71,36 @@
                 android:textColor="@color/white"
                 tools:text="인테리어" />
         </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="#80000000"
+            android:visibility="@{isDeleteMode ? item.isChecked() ? View.GONE : View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="#80FFFFFF"
+            android:visibility="@{isDeleteMode ? item.isChecked() ? View.VISIBLE : View.GONE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="@{item.isChecked()}"
+            android:clickable="false"
+            android:visibility="@{isDeleteMode ? View.VISIBLE : View.GONE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

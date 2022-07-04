@@ -1,7 +1,5 @@
 package com.samderra.archive.util.ext
 
-import io.reactivex.Observable
+import androidx.databinding.ObservableBoolean
 
-fun <T> Observable<T>.observeOnUiAndSubscribe(targetText: String) {
-
-}
+fun ObservableBoolean.reverse() = this.set(this.get().not())

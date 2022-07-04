@@ -13,6 +13,8 @@
         <variable
             name="item"
             type="com.samderra.archive.ui.model.article.SDRArticle" />
+
+        <import type="android.view.View" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -41,7 +43,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:clickable="true"
             android:onClick="@{() -> vm.requestDeleteArticle(item)}"
             android:padding="8dp"
             android:src="@drawable/ic_trash_white"
@@ -54,7 +55,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:clickable="true"
             android:padding="8dp"
             android:src="@drawable/ic_edit_white"
             app:layout_constraintBottom_toBottomOf="@id/iv_delete"
@@ -67,7 +67,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:clickable="true"
             android:padding="8dp"
             android:src="@drawable/ic_export_white"
             app:layout_constraintBottom_toBottomOf="@id/iv_edit"
@@ -84,6 +83,7 @@
             android:ellipsize="end"
             android:text="@{item.name}"
             android:textColor="@color/white"
+            android:visibility="@{item.name.length() == 0 ? View.GONE : View.VISIBLE}"
             app:layout_constraintEnd_toEndOf="@id/guideline_end"
             app:layout_constraintStart_toStartOf="@id/guideline_start"
             app:layout_constraintTop_toBottomOf="@id/iv_delete"
@@ -98,6 +98,7 @@
             android:ellipsize="end"
             android:text="@{item.description}"
             android:textColor="@color/lightgrey300"
+            android:visibility="@{item.description.length() == 0 ? View.GONE : View.VISIBLE}"
             app:layout_constraintBottom_toTopOf="@id/tv_date"
             app:layout_constraintEnd_toEndOf="@id/guideline_end"
             app:layout_constraintStart_toStartOf="@id/guideline_start"
@@ -113,6 +114,7 @@
             android:ellipsize="end"
             android:text="@{item.createdAt}"
             android:textColor="@color/grey400"
+            android:visibility="@{item.createdAt.length() == 0 ? View.GONE : View.VISIBLE}"
             app:layout_constraintBottom_toBottomOf="@id/space"
             app:layout_constraintEnd_toEndOf="@id/guideline_end"
             app:layout_constraintStart_toStartOf="@id/guideline_start"

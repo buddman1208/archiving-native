@@ -1,6 +1,7 @@
 package com.samderra.archive.ui.view.main
 
 import android.content.Intent
+import android.util.Log
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,6 +22,7 @@ class MainActivity() : BaseVmActivity<ActivityMainBinding>(
     MainViewModel::class.java
 ) {
     private var lastPressedTime: Long = System.currentTimeMillis()
+    private val categoryAdapter: CategoryAdapter by lazy { CategoryAdapter(viewModel) }
 
     private fun MainViewModel.setObserves() {
         displayMode.observe(lifecycleOwner) {
@@ -33,19 +35,42 @@ class MainActivity() : BaseVmActivity<ActivityMainBinding>(
         categoryOpenEvent.observe(lifecycleOwner, ::openCategoryActivity)
 
         event.observeEvent(lifecycleOwner) {
-            when (it) {
-                MainEvent.OPEN_SORT_OPTIONS -> this@MainActivity.showSortOptions()
+            this@MainActivity.run {
+                when (it) {
+                    MainEvent.SHOW_POST_ACTIVITY -> {}
+                    MainEvent.SHOW_MAIN_OPTIONS -> showMainOptions()
+                    MainEvent.CATEGORY_DELETE_CONFIRM -> updateDeleteMode(false)
+                }
             }
         }
     }
 
     override fun initActivity() {
+        Log.e("asdf", "${viewModel.isDeleteMode}")
         startActivity(
             Intent(this@MainActivity, TutorialActivity::class.java)
         )
         viewModel.setObserves()
-        binding.rvMain.adapter = CategoryAdapter(viewModel)
+        binding.rvMain.adapter = categoryAdapter
         binding.searchResultContainer.rvSearchResult.adapter = CategorySearchAdapter(viewModel)
+    }
+
+    private fun showMainOptions() {
+        MaterialAlertDialogBuilder(this@MainActivity)
+            .setTitle("설정")
+            .setItems(
+                when (viewModel.displayMode.value ?: return) {
+                    DisplayMode.GRID -> R.array.main_settings_listview
+                    DisplayMode.LIST -> R.array.main_settings_gridview
+                }
+            ) { _, which ->
+                when (which) {
+                    0 -> showSortOptions()
+                    1 -> viewModel.switchDisplayMode()
+                    2 -> updateDeleteMode(true)
+                }
+            }
+            .show()
     }
 
     private fun showSortOptions() {
@@ -57,6 +82,15 @@ class MainActivity() : BaseVmActivity<ActivityMainBinding>(
             .show()
     }
 
+    private fun updateDeleteMode(value: Boolean) {
+        categoryAdapter.updateDeleteMode(value)
+        viewModel.isDeleteMode.value = value
+        if (!value) {
+            viewModel.clearClickedItems()
+        }
+        Log.e("asdf", "${viewModel.isDeleteMode}")
+    }
+
     private fun openCategoryActivity(category: SDRCategory) {
         startActivity(
             Intent(this, CategoryActivity::class.java)
@@ -66,7 +100,11 @@ class MainActivity() : BaseVmActivity<ActivityMainBinding>(
 
     override fun onBackPressed() {
         if (System.currentTimeMillis() - lastPressedTime > 1000L) {
-            Toast.makeText(this@MainActivity, "다시 한 번 누르면 종료됩니다.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                this@MainActivity,
+                getString(R.string.double_tap_to_exit),
+                Toast.LENGTH_SHORT
+            ).show()
             lastPressedTime = System.currentTimeMillis()
         } else finish()
     }

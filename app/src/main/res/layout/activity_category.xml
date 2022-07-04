@@ -30,8 +30,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+                app:layout_collapseMode="pin">
 
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.AppBarLayout>
@@ -46,7 +45,6 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginBottom="?attr/actionBarSize"
                 android:animateLayoutChanges="true"
                 android:background="@color/darkgrey400"
                 tools:context=".ui.view.category.CategoryActivity">
@@ -74,7 +72,7 @@
                     android:paddingTop="4dp"
                     android:paddingEnd="4dp"
                     android:paddingBottom="2dp"
-                    android:text="43"
+                    android:text="@{String.valueOf(vm.articleItems.size())}"
                     android:textColor="#000"
                     app:layout_constraintBottom_toBottomOf="@id/tv_title"
                     app:layout_constraintStart_toEndOf="@id/tv_title"
@@ -91,6 +89,7 @@
                     android:onClick="@{() -> vm.showSortOptions()}"
                     android:text="@{@stringArray/sort_options[vm.sortOption.value]}"
                     android:textColor="@color/grey300"
+                    android:visibility="@{vm.articleItems.size() == 0 ? View.GONE : View.VISIBLE}"
                     app:drawableEndCompat="@drawable/ic_sort_grey"
                     app:layout_constraintStart_toStartOf="@id/tv_title"
                     app:layout_constraintTop_toBottomOf="@id/tv_title"
@@ -107,7 +106,18 @@
                     app:layout_constraintTop_toBottomOf="@id/tv_sort"
                     app:spanCount="3"
                     bind:bindArticleGridList="@{vm.articleItems}"
-                    tools:listitem="@layout/item_article_grid" />
+                    tools:listitem="@layout/item_article_grid"
+                    tools:visibility="gone" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:text="@string/text_no_article"
+                    android:visibility="@{vm.articleItems.size() == 0 ? View.VISIBLE : View.GONE}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_sort" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
     </androidx.appcompat.widget.LinearLayoutCompat>

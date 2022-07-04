@@ -13,6 +13,7 @@ import com.samderra.archive.ui.adapter.CategorySearchAdapter
 import com.samderra.archive.ui.model.main.SDRCategory
 import com.samderra.archive.util.Event
 import com.samderra.archive.util.emit
+import com.samderra.archive.util.ext.reverse
 
 class MainViewModel(
     private val authDataSource: AuthDataSource,
@@ -20,6 +21,7 @@ class MainViewModel(
 ) : BaseViewModel() {
 
     val displayMode: MutableLiveData<DisplayMode> = MutableLiveData(DisplayMode.GRID)
+    val isDeleteMode: MutableLiveData<Boolean> = MutableLiveData(false)
     val searchQuery: MutableLiveData<String> = MutableLiveData("")
     val sortOption: MutableLiveData<SortOption> = MutableLiveData(SortOption.NAME)
 
@@ -27,6 +29,7 @@ class MainViewModel(
     val event: MutableLiveData<Event<MainEvent>> = MutableLiveData()
 
     val categoryItems: MutableLiveData<List<SDRCategory>> = MutableLiveData(listOf())
+    val checkedCategoryItemCnt: MutableLiveData<Int> = MutableLiveData(0)
 
     val categorySearchResult = MutableLiveData<List<SDRCategory>>(
         listOf(
@@ -68,20 +71,8 @@ class MainViewModel(
         searchQuery.value = ""
     }
 
-    fun showSortOptions() {
-        event.emit(MainEvent.OPEN_SORT_OPTIONS)
-    }
-
     fun changeSortOptions(option: SortOption) {
         sortOption.value = option
-    }
-
-    fun createCategory() {
-        // todo
-    }
-
-    fun openCategory(category: SDRCategory) {
-        categoryOpenEvent.value = category
     }
 
     fun switchDisplayMode() {
@@ -89,6 +80,32 @@ class MainViewModel(
             DisplayMode.LIST -> DisplayMode.GRID
             DisplayMode.GRID -> DisplayMode.LIST
             else -> return
+        }
+    }
+
+    fun showMainOptions() {
+        event.emit(MainEvent.SHOW_MAIN_OPTIONS)
+    }
+
+    fun clearClickedItems() {
+        categoryItems.value?.forEach { it.isChecked.set(false) }
+        checkedCategoryItemCnt.value = 0
+    }
+
+    fun onCategoryClicked(category: SDRCategory) {
+        if (isDeleteMode.value == true) {
+            category.isChecked.reverse()
+            checkedCategoryItemCnt.value =
+                categoryItems.value?.filter { it.isChecked.get() }?.count()
+        } else {
+            categoryOpenEvent.value = category
+        }
+    }
+
+    fun onCategoryDeleteAction(isConfirm: Boolean) {
+        event.emit(MainEvent.CATEGORY_DELETE_CONFIRM)
+        if (isConfirm) {
+            // todo
         }
     }
 
@@ -114,7 +131,9 @@ class MainViewModel(
 }
 
 enum class MainEvent {
-    OPEN_SORT_OPTIONS
+    SHOW_POST_ACTIVITY,
+    SHOW_MAIN_OPTIONS,
+    CATEGORY_DELETE_CONFIRM
 }
 
 enum class DisplayMode {
