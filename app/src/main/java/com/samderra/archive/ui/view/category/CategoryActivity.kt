@@ -2,10 +2,12 @@ package com.samderra.archive.ui.view.category
 
 import android.content.Intent
 import android.view.Menu
+import android.view.MenuItem
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.samderra.archive.R
 import com.samderra.archive.base.BaseVmActivity
 import com.samderra.archive.databinding.ActivityCategoryBinding
+import com.samderra.archive.ui.BottomMenuFragment
 import com.samderra.archive.ui.adapter.ArticleGridAdapter
 import com.samderra.archive.ui.model.article.SDRArticle
 import com.samderra.archive.ui.model.main.SDRCategory
@@ -33,6 +35,9 @@ class CategoryActivity() : BaseVmActivity<ActivityCategoryBinding>(
     }
 
     override fun initActivity() {
+        binding.tvTitle.setOnClickListener {
+            showCategoryDeleteDialog()
+        }
         viewModel.setObserves()
         binding.rvArticle.adapter = ArticleGridAdapter(viewModel)
         initCollapsingToolbar()
@@ -54,6 +59,12 @@ class CategoryActivity() : BaseVmActivity<ActivityCategoryBinding>(
             .show()
     }
 
+    private fun showCategoryDeleteDialog() {
+        BottomMenuFragment
+            .newInstance(resources.getStringArray(R.array.sort_options))
+            .show(supportFragmentManager, "tag")
+    }
+
 
     private fun initCollapsingToolbar() {
         toolbarTitle = ""
@@ -68,6 +79,15 @@ class CategoryActivity() : BaseVmActivity<ActivityCategoryBinding>(
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_category, menu)
         return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menu_category_delete -> {
+                showCategoryDeleteDialog()
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
 
