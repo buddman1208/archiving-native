@@ -9,6 +9,10 @@
         <item>리스트뷰로 보기</item>
         <item>카테고리 삭제</item>
     </string-array>
+    <string-array name="category_delete_option">
+        <item>카테고리만 삭제</item>
+        <item>카테고리 내의 모든 게시물 삭제</item>
+    </string-array>
     <string-array name="sort_options">
         <item>이름 순</item>
         <item>최근 저장 순</item>

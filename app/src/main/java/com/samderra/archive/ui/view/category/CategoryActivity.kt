@@ -8,6 +8,7 @@ import com.samderra.archive.R
 import com.samderra.archive.base.BaseVmActivity
 import com.samderra.archive.databinding.ActivityCategoryBinding
 import com.samderra.archive.ui.BottomMenuFragment
+import com.samderra.archive.ui.BottomMenuItem
 import com.samderra.archive.ui.adapter.ArticleGridAdapter
 import com.samderra.archive.ui.model.article.SDRArticle
 import com.samderra.archive.ui.model.main.SDRCategory
@@ -61,7 +62,13 @@ class CategoryActivity() : BaseVmActivity<ActivityCategoryBinding>(
 
     private fun showCategoryDeleteDialog() {
         BottomMenuFragment
-            .newInstance(resources.getStringArray(R.array.sort_options))
+            .newInstance(
+                arrayOf(
+                    BottomMenuItem("카테고리만 삭제", true),
+                    BottomMenuItem("카테고리 내 모든 게시물 삭제")
+                ),
+                "이 카테고리만 지우시겠습니까,\n이 카테고리에 포함된 게시물까지 모두 지우시겠습니까?",
+            )
             .show(supportFragmentManager, "tag")
     }
 

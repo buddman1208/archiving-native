@@ -1,20 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <variable
             name="item"
-            type="String" />
+            type="com.samderra.archive.ui.BottomMenuItem" />
     </data>
 
     <TextView
-        style="@style/Pretendard.Medium.16"
+        style="@style/Pretendard.Light.16"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:text="@{item}"
-        android:textColor="#FFF"
+        android:paddingStart="16dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="8dp"
+        android:text="@{item.content}"
+        android:textColor="@color/lightgrey100"
+        bind:isBold="@{item.bold}"
         tools:text="item" />
 </layout>

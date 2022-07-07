@@ -1,5 +1,6 @@
 package com.samderra.archive.util.ext
 
+import android.graphics.Typeface
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
@@ -28,4 +29,9 @@ fun TextView.highListTargetText(targetText: String) {
     } else {
         this.text = this.text
     }
+}
+
+@BindingAdapter("isBold")
+fun TextView.isBold(isBold: Boolean) {
+    if (isBold) this.typeface = Typeface.DEFAULT_BOLD
 }
