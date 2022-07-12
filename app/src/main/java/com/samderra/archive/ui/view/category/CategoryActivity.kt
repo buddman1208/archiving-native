@@ -1,6 +1,7 @@
 package com.samderra.archive.ui.view.category
 
 import android.content.Intent
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -26,11 +27,16 @@ class CategoryActivity() : BaseVmActivity<ActivityCategoryBinding>(
         intent.getSerializableExtra("category") as SDRCategory
     }
 
+    private val articleAdapter: ArticleGridAdapter by lazy {
+        ArticleGridAdapter(viewModel)
+    }
+
     fun CategoryViewModel.setObserves() {
         articleOpenEvent.observe(lifecycleOwner, ::openArticleActivity)
-        categoryActions.observeEvent(lifecycleOwner) {
+        event.observeEvent(lifecycleOwner) {
             when (it) {
                 CategoryActions.OPEN_SORT_OPTIONS -> this@CategoryActivity.showSortOptions()
+                CategoryActions.ARTICLE_DELETE_CONFIRM -> updateArticleDeleteMode(false)
             }
         }
     }
@@ -40,7 +46,7 @@ class CategoryActivity() : BaseVmActivity<ActivityCategoryBinding>(
             showCategoryDeleteDialog()
         }
         viewModel.setObserves()
-        binding.rvArticle.adapter = ArticleGridAdapter(viewModel)
+        binding.rvArticle.adapter = articleAdapter
         initCollapsingToolbar()
     }
 
@@ -88,8 +94,21 @@ class CategoryActivity() : BaseVmActivity<ActivityCategoryBinding>(
         return super.onCreateOptionsMenu(menu)
     }
 
+    private fun updateArticleDeleteMode(value: Boolean) {
+        articleAdapter.updateDeleteMode(value)
+        viewModel.isDeleteMode.set(value)
+        if (!value) {
+            viewModel.clearClickedItems()
+        }
+        Log.e("asdf", "${viewModel.isDeleteMode}")
+    }
+
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
+            R.id.menu_category_delete_article -> {
+                updateArticleDeleteMode(true)
+            }
             R.id.menu_category_delete -> {
                 showCategoryDeleteDialog()
             }

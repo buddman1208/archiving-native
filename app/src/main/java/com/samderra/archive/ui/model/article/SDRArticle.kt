@@ -1,5 +1,7 @@
 package com.samderra.archive.ui.model.article
 
+import androidx.databinding.ObservableBoolean
+
 data class SDRArticle(
     val articleId: Long,
     val thumbnailUrl: String,
@@ -8,6 +10,8 @@ data class SDRArticle(
     val description: String,
     val createdAt: String
 ) {
+    val isChecked: ObservableBoolean = ObservableBoolean(false)
+
     companion object {
         fun dummy(): SDRArticle = SDRArticle(
             articleId = System.currentTimeMillis(),

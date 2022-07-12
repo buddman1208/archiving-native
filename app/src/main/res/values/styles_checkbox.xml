@@ -4,7 +4,7 @@
     <style name="SDRCheckBox" parent="Widget.AppCompat.CompoundButton.CheckBox">
         <item name="android:minWidth">0dp</item>
         <item name="android:minHeight">0dp</item>
-        <item name="android:layout_margin">8dp</item>
+        <item name="android:layout_margin">2dp</item>
         <item name="android:button">@drawable/ic_checkbox_selector</item>
     </style>
 
