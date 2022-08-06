@@ -9,11 +9,10 @@ import com.samderra.archive.R
 import com.samderra.archive.base.BaseRecyclerAdapter
 import com.samderra.archive.databinding.ItemBottomMenuBinding
 import com.samderra.archive.databinding.LayoutBottomMenuFragmentBinding
+import kotlin.random.Random
 
-class BottomMenuFragment
-private constructor(
-    val items: Array<BottomMenuItem>,
-    val title: String?
+class BottomMenuFragment constructor(
+    val options: BuildOptions
 ) : BottomSheetDialogFragment() {
 
     lateinit var binding: LayoutBottomMenuFragmentBinding
@@ -35,22 +34,22 @@ private constructor(
 
     private fun initList() {
         binding.apply {
-            tvTitle.text = title
+            tvTitle.text = options.title
             rvContent.adapter = listAdapter
         }
 
-        listAdapter.updateItems(items.toList())
+        listAdapter.updateItems(options.items.toList())
     }
+
+    data class BuildOptions(
+        val title: String,
+        val items: Array<BottomMenuItem>
+    )
 
     companion object {
         fun newInstance(
-            items: Array<BottomMenuItem>,
-            title: String? = null
-        ): BottomMenuFragment {
-            return BottomMenuFragment(
-                items, title
-            )
-        }
+            buildOptions: BuildOptions,
+        ): BottomMenuFragment = BottomMenuFragment(buildOptions)
     }
 }
 
@@ -60,5 +59,8 @@ class BottomMenuAdapter : BaseRecyclerAdapter<BottomMenuItem, ItemBottomMenuBind
 
 data class BottomMenuItem(
     val content: String,
-    val isBold: Boolean = false
-)
+    val isBold: Boolean = false,
+    val callback: (() -> Unit)? = null
+) {
+    val id = Random.hashCode()
+}
