@@ -27,5 +27,6 @@
     <string name="text_no_article">게시물이 없습니다.</string>
     <string name="text_category_to_search_or_add">찾고 싶거나 추가하고 싶은 보관함</string>
     <string name="text_cancel">취소</string>
+    <string name="category_delete_title">이 카테고리만 지우시겠습니까,\n이 카테고리에 포함된 게시물까지 모두 지우시겠습니까?</string>
     <string name="double_tap_to_exit">다시 한 번 누르면 종료됩니다.</string>
 </resources>

@@ -1,6 +1,7 @@
 package com.samderra.archive.ui
 
 import android.os.Bundle
+import android.text.Spanned
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -43,7 +44,7 @@ class BottomMenuFragment constructor(
 
     data class BuildOptions(
         val title: String,
-        val items: Array<BottomMenuItem>
+        val items: List<BottomMenuItem>
     )
 
     companion object {
@@ -58,8 +59,7 @@ class BottomMenuAdapter : BaseRecyclerAdapter<BottomMenuItem, ItemBottomMenuBind
 )
 
 data class BottomMenuItem(
-    val content: String,
-    val isBold: Boolean = false,
+    val content: Spanned,
     val callback: (() -> Unit)? = null
 ) {
     val id = Random.hashCode()

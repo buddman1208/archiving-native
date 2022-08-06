@@ -15,6 +15,7 @@ import com.samderra.archive.ui.model.article.SDRArticle
 import com.samderra.archive.ui.model.main.SDRCategory
 import com.samderra.archive.ui.view.article.ArticleActivity
 import com.samderra.archive.ui.view.main.SortOption
+import com.samderra.archive.util.ext.formatHtml
 import com.samderra.archive.util.observeEvent
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -67,14 +68,24 @@ class CategoryActivity() : BaseVmActivity<ActivityCategoryBinding>(
     }
 
     private fun showCategoryDeleteDialog() {
-        BottomMenuFragment
-            .newInstance(
-                arrayOf(
-                    BottomMenuItem("카테고리만 삭제", true),
-                    BottomMenuItem("카테고리 내 모든 게시물 삭제")
-                ),
-                "이 카테고리만 지우시겠습니까,\n이 카테고리에 포함된 게시물까지 모두 지우시겠습니까?",
-            )
+        val options = BottomMenuFragment.BuildOptions(
+            title = getString(R.string.category_delete_title),
+            items = resources
+                .getStringArray(R.array.category_delete_option)
+                .mapIndexed { idx, string ->
+                    BottomMenuItem(
+                        content = string.formatHtml(),
+                        callback = {
+                            when (idx) {
+                                0 -> {}
+                                1 -> {}
+                                else -> {}
+                            }
+                        }
+                    )
+                }
+        )
+        BottomMenuFragment(options)
             .show(supportFragmentManager, "tag")
     }
 
