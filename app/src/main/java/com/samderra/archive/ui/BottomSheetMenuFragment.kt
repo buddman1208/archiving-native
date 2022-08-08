@@ -19,6 +19,15 @@ class BottomMenuFragment constructor(
     lateinit var binding: LayoutBottomMenuFragmentBinding
     private val listAdapter: BottomMenuAdapter by lazy { BottomMenuAdapter() }
 
+    init {
+        options.items.forEach {
+            it.realCallback = {
+                dismiss()
+                it.callback?.invoke()
+            }
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -47,11 +56,6 @@ class BottomMenuFragment constructor(
         val items: List<BottomMenuItem>
     )
 
-    companion object {
-        fun newInstance(
-            buildOptions: BuildOptions,
-        ): BottomMenuFragment = BottomMenuFragment(buildOptions)
-    }
 }
 
 class BottomMenuAdapter : BaseRecyclerAdapter<BottomMenuItem, ItemBottomMenuBinding>(
@@ -62,5 +66,6 @@ data class BottomMenuItem(
     val content: Spanned,
     val callback: (() -> Unit)? = null
 ) {
+    var realCallback: (() -> Unit) = {}
     val id = Random.hashCode()
 }

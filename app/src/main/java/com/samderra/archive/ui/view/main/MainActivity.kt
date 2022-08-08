@@ -9,11 +9,14 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.samderra.archive.R
 import com.samderra.archive.base.BaseVmActivity
 import com.samderra.archive.databinding.ActivityMainBinding
+import com.samderra.archive.ui.BottomMenuFragment
+import com.samderra.archive.ui.BottomMenuItem
 import com.samderra.archive.ui.adapter.CategoryAdapter
 import com.samderra.archive.ui.adapter.CategorySearchAdapter
 import com.samderra.archive.ui.model.main.SDRCategory
 import com.samderra.archive.ui.view.category.CategoryActivity
 import com.samderra.archive.ui.view.tutorial.TutorialActivity
+import com.samderra.archive.util.ext.formatHtml
 import com.samderra.archive.util.observeEvent
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -56,21 +59,30 @@ class MainActivity() : BaseVmActivity<ActivityMainBinding>(
     }
 
     private fun showMainOptions() {
-        MaterialAlertDialogBuilder(this@MainActivity)
-            .setTitle("설정")
-            .setItems(
-                when (viewModel.displayMode.value ?: return) {
-                    DisplayMode.GRID -> R.array.main_settings_listview
-                    DisplayMode.LIST -> R.array.main_settings_gridview
+        val options = BottomMenuFragment.BuildOptions(
+            title = getString(R.string.text_setting),
+            items = resources
+                .getStringArray(
+                    when (viewModel.displayMode.value ?: return) {
+                        DisplayMode.GRID -> R.array.main_settings_listview
+                        DisplayMode.LIST -> R.array.main_settings_gridview
+                    }
+                )
+                .mapIndexed { idx, string ->
+                    BottomMenuItem(
+                        content = string.formatHtml(),
+                        callback = {
+                            when (idx) {
+                                0 -> showSortOptions()
+                                1 -> viewModel.switchDisplayMode()
+                                2 -> updateDeleteMode(true)
+                            }
+                        }
+                    )
                 }
-            ) { _, which ->
-                when (which) {
-                    0 -> showSortOptions()
-                    1 -> viewModel.switchDisplayMode()
-                    2 -> updateDeleteMode(true)
-                }
-            }
-            .show()
+        )
+        BottomMenuFragment(options)
+            .show(supportFragmentManager, "tag")
     }
 
     private fun showSortOptions() {
