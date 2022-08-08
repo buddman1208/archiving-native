@@ -5,7 +5,6 @@ import android.util.Log
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.samderra.archive.R
 import com.samderra.archive.base.BaseVmActivity
 import com.samderra.archive.databinding.ActivityMainBinding
@@ -86,12 +85,19 @@ class MainActivity() : BaseVmActivity<ActivityMainBinding>(
     }
 
     private fun showSortOptions() {
-        MaterialAlertDialogBuilder(this@MainActivity)
-            .setTitle("정렬 순서")
-            .setItems(R.array.sort_options) { _, which ->
-                viewModel.changeSortOptions(SortOption.indexOf(which))
-            }
-            .show()
+        val options = BottomMenuFragment.BuildOptions(
+            title = getString(R.string.text_sort_options),
+            items = resources
+                .getStringArray(R.array.sort_options)
+                .mapIndexed { idx, string ->
+                    BottomMenuItem(
+                        content = string.formatHtml(),
+                        callback = { viewModel.changeSortOptions(SortOption.indexOf(idx)) }
+                    )
+                }
+        )
+        BottomMenuFragment(options)
+            .show(supportFragmentManager, "tag")
     }
 
     private fun updateDeleteMode(value: Boolean) {
@@ -128,12 +134,11 @@ class MainActivity() : BaseVmActivity<ActivityMainBinding>(
 enum class SortOption(
     val value: Int
 ) {
-    // 이름 순 / 최근 저장 순 / 오래된 저장 순 / 가장 많이 본 순 / 가장 적게 본 순
+    // 이름 순 / 최근 저장 순 / 오래된 저장 순 / 최근에 본 순
     NAME(0),
     RECENT(1),
     OLD(2),
-    MOST_VIEWED(3),
-    LEAST_VIEWED(4);
+    RECENT_VIEWED(3);
 
     companion object {
         fun indexOf(index: Int): SortOption {

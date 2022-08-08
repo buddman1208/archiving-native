@@ -30,4 +30,5 @@
     <string name="category_delete_title">이 카테고리만 지우시겠습니까,\n이 카테고리에 포함된 게시물까지 모두 지우시겠습니까?</string>
     <string name="double_tap_to_exit">다시 한 번 누르면 종료됩니다.</string>
     <string name="text_setting">설정</string>
+    <string name="text_sort_options">정렬 순서</string>
 </resources>
