@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <variable
             name="vm"
             type="com.samderra.archive.ui.view.post.fromshare.PostFromShareViewModel" />
+
+        <import type="android.view.View" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,32 +18,56 @@
         android:layout_height="match_parent"
         android:background="@color/darkgrey400">
 
-        <androidx.appcompat.widget.Toolbar
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:padding="16dp"
+                android:src="@drawable/ic_close"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                style="@style/UG.Medium.18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="4dp"
+                android:text="@string/ask_where_to_post"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@id/et_query"
+            android:id="@+id/query_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar">
 
             <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/et_query"
                 style="@style/Pretendard.Medium.16"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
                 android:background="@color/darkgrey300"
                 android:drawableStart="@drawable/ic_search_grey"
                 android:drawablePadding="10dp"
                 android:hint="@string/text_category_to_search_or_add"
                 android:maxLength="20"
+                android:onTextChanged="@{(text, start, before, count) -> vm.search(text.toString())}"
                 android:padding="16dp"
+                android:text="@={vm.searchQuery}"
                 android:textColor="@color/white"
                 android:textColorHint="@color/grey400"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -52,19 +80,73 @@
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:layout_margin="8dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
+                android:background="@null"
+                android:onClick="@{() -> vm.clearQuery()}"
                 android:src="@drawable/ic_input_cancel"
-                app:layout_constraintBottom_toBottomOf="@id/et_query"
-                app:layout_constraintEnd_toEndOf="@id/et_query"
-                app:layout_constraintTop_toTopOf="@id/et_query" />
+                app:layout_constraintBottom_toBottomOf="@id/query_container"
+                app:layout_constraintEnd_toEndOf="@id/query_container"
+                app:layout_constraintTop_toTopOf="@id/query_container" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_category"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/et_query" />
+            app:layout_constraintTop_toBottomOf="@id/query_container"
+            bind:bindCategorySelectList="@{vm.displayedCategoryList}"
+            tools:listitem="@layout/item_category_select" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="@{vm.displayedCategoryList.isEmpty &amp;&amp; !vm.searchQuery.trim().isEmpty() ? View.VISIBLE : View.GONE}"
+            tools:visibility="gone">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_none"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_search_none"
+                app:layout_constraintBottom_toTopOf="@id/tv_none"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed" />
+
+            <TextView
+                android:id="@+id/tv_none"
+                style="@style/Pretendard.Medium.16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:text="@string/search_category_result_none"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toTopOf="@id/btn_add_category"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv_none" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_add_category"
+                style="@style/ActionButton.Green"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="63dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="63dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:text="@{@string/category_add_btn_format(vm.searchQuery)}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_none"
+                tools:text="+ '남양주 카페' 추가" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
