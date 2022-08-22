@@ -33,7 +33,7 @@ class BottomMenuFragment constructor(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = LayoutBottomMenuFragmentBinding.inflate(inflater)
+        binding = LayoutBottomMenuFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
