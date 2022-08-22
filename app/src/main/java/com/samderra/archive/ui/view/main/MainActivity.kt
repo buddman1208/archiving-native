@@ -14,7 +14,6 @@ import com.samderra.archive.ui.adapter.CategoryAdapter
 import com.samderra.archive.ui.adapter.CategorySearchAdapter
 import com.samderra.archive.ui.model.main.SDRCategory
 import com.samderra.archive.ui.view.category.CategoryActivity
-import com.samderra.archive.ui.view.post.fromshare.PostFromShareActivity
 import com.samderra.archive.util.ext.formatHtml
 import com.samderra.archive.util.observeEvent
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -48,17 +47,10 @@ class MainActivity() : BaseVmActivity<ActivityMainBinding>(
     }
 
     override fun initActivity() {
-        startActivity(
-            Intent(this@MainActivity, PostFromShareActivity::class.java)
-        )
-        finish()
-
         Log.e("asdf", "${viewModel.isDeleteMode}")
         viewModel.setObserves()
         binding.rvMain.adapter = categoryAdapter
         binding.searchResultContainer.rvSearchResult.adapter = CategorySearchAdapter(viewModel)
-
-
     }
 
     private fun showMainOptions() {

@@ -5,7 +5,7 @@ import android.content.Intent
 import com.samderra.archive.R
 import com.samderra.archive.base.BaseVmActivity
 import com.samderra.archive.databinding.ActivitySplashBinding
-import com.samderra.archive.ui.view.main.MainActivity
+import com.samderra.archive.ui.view.tutorial.TutorialActivity
 import com.samderra.archive.util.observeEvent
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -19,8 +19,9 @@ class SplashActivity() : BaseVmActivity<ActivitySplashBinding>(
             when (it) {
                 SplashEvent.NEXT -> {
                     startActivity(
-                        Intent(this@SplashActivity, MainActivity::class.java)
+                        Intent(this@SplashActivity, TutorialActivity::class.java)
                     )
+                    finish()
                 }
             }
         }

@@ -4,8 +4,6 @@ import androidx.databinding.BindingAdapter
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.samderra.archive.base.BaseViewModel
-import com.samderra.archive.data.local.pref.PreferenceManager
-import com.samderra.archive.data.remote.model.request.AuthTokenRequest
 import com.samderra.archive.data.remote.source.AuthDataSource
 import com.samderra.archive.data.remote.source.CategoryDataSource
 import com.samderra.archive.ui.adapter.CategoryAdapter
@@ -53,15 +51,7 @@ class MainViewModel(
     )
 
     init {
-        PreferenceManager.userPref.token = ""
-        authDataSource
-            .getToken(AuthTokenRequest("0"))
-            .doOnNext {
-                println(it.toString())
-                messageEvent.value = Event("${it.name}님 환영합니다.")
-                PreferenceManager.userPref.token = it.token
-            }
-            .flatMap { categoryDataSource.getCategories() }
+        categoryDataSource.getCategories()
             .subscribeAuto {
                 categoryItems.value = it
             }
