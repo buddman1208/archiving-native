@@ -17,6 +17,7 @@ class PostFromShareViewModel(
     private val categoryList: MutableList<SDRCategory> = mutableListOf()
     val displayedCategoryList: MutableLiveData<List<SDRCategory>> = MutableLiveData(listOf())
     val searchQuery: MutableLiveData<String> = MutableLiveData("")
+    val selectedCategoryCnt: MutableLiveData<Int> = MutableLiveData(0)
 
     init {
         categoryDataSource.getCategories()
@@ -31,7 +32,10 @@ class PostFromShareViewModel(
         searchQuery.value = ""
     }
 
-    fun onCategoryClicked(item: SDRCategory) = item.isChecked.reverse()
+    fun onCategoryClicked(item: SDRCategory) {
+        item.isChecked.reverse()
+        selectedCategoryCnt.value = categoryList.filter { it.isChecked.get() }.size
+    }
 
     fun search(query: String) {
         displayedCategoryList.value = if (query.isEmpty()) {

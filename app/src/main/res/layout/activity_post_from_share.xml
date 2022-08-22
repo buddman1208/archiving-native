@@ -40,7 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="4dp"
-                android:text="@string/ask_where_to_post"
+                android:text="@{vm.selectedCategoryCnt > 0 ? @string/ask_where_to_post_confirm_format(vm.selectedCategoryCnt) : @string/ask_where_to_post}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -94,7 +94,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/input_message_container"
             app:layout_constraintTop_toBottomOf="@id/query_container"
             bind:bindCategorySelectList="@{vm.displayedCategoryList}"
             tools:listitem="@layout/item_category_select" />
@@ -146,6 +146,49 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_none"
                 tools:text="+ '남양주 카페' 추가" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/input_message_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/et_message"
+                style="@style/Pretendard.Medium.16"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_marginEnd="16dp"
+                android:background="@color/darkgrey300"
+                android:gravity="top"
+                android:hint="@string/input_article_message_hint"
+                android:padding="12dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/btn_next"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            </androidx.appcompat.widget.AppCompatEditText>
+
+            <ImageButton
+                android:id="@+id/btn_next"
+                style="@style/ActionButton.Green"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:paddingStart="22dp"
+                android:paddingEnd="22dp"
+                android:src="@drawable/ic_arrow_big_right"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/darkgrey400" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
